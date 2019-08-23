@@ -1,143 +1,83 @@
-# Collection of custom scripts
+# Normalized difference moisture index
 
-## Custom Scripts Repository
+<a href="#" id='togglescript'>Show</a> script or [download](script.js){:target="_blank"} it.
+<div id='script_view' style="display:none">
+{% highlight javascript %}
+      {% include_relative script.js %}
+{% endhighlight %}
+</div>
 
-This repository contains a collection of custom scripts for [Sentinel Hub](https://www.sentinel-hub.com/), which can be fed to the services via the URL.
-
-Scripts are organised by sensors supported on Sentinel Hub:
-  - [Sentinel-1](#sentinel-1)
-  - [Sentinel-2](#sentinel-2)
-  - [Sentinel-3](#sentinel-3)
-  - [Sentinel-5P](#sentinel-5P)
-  - [Landsat-8](#landsat-8)
-  - [MODIS](#modis)
-
-You are invited to publish your own scripts - see [howto](#howto).
-
-
-## <a name="sentinel-1"></a>Sentinel-1
-The Sentinel-1 imagery is provided by two polar-orbiting satellites, operating day and night performing C-band synthetic aperture radar imaging, enabling them to acquire imagery regardless of the weather. Main applications are for monitoring sea ice, oil spills, marine winds, waves & currents, land-use change, land deformation among others, and to respond to emergencies such as floods and earthquakes. The identical satellites orbit Earth 180° apart and at an altitude of almost 700 km, offering a global revisit time of 6-12 days depending on the area (check observation scenario). Sentinel-1’s radar can operate in four modes. The spatial resolution depends on the mode: approx. 5 m x 20 m for IW mode and approx. 20 m x 40 m for EW mode. See [Copernicus services](http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus/Sentinel-1/) for more details.
-
-#### Disaster management and prevention algorithms
- - [Seldom and regular water surface detection](sentinel-1/seldom_and_regular_water_surface_detection)
- - [Forest Hurricane](sentinel-1/forest_hurricane)
-
-#### Urban planning algorithm
- - [Urban areas](sentinel-1/urban_areas)
-
-#### Marine environment algorithm
- - [Water surface roughness visualization](sentinel-1/water_surface_roughness_visualization)
-
-#### Other available scripts
- - [SAR false color visualization](sentinel-1/sar_false_color_visualization)
- - [SAR multi-temporal backscatter coefficient composite](sentinel-1/sar_multi-temporal_backscatter_coefficient_composite)
+## Evaluate and visualize
+ - [Sentinel Playground](https://apps.sentinel-hub.com/sentinel-playground/?source=S2&lat=43.514198796857976&lng=16.601028442382812&zoom=11&preset=CUSTOM&layers=B01,B02,B03&maxcc=20&gain=1.0&gamma=1.0&time=2019-02-01%7C2019-08-23&atmFilter=&showDates=false&evalscript=Ly8KLy8gTm9ybWFsaXplZCBEaWZmZXJlbmNlIDgyMC8xNjAwIE5vcm1hbGl6ZWQgRGlmZmVyZW5jZSBNb2lzdHVyZSBJbmRleCAoYWJicnYuIE5ETUkpCi8vCi8vIEdlbmVyYWwgZm9ybXVsYTogKDgyMG5tIC0gMTYwMG5tKSAvICg4MjBubSArIDE2MDBubSkKLy8KLy8gVVJMIGh0dHBzOi8vd3d3LmluZGV4ZGF0YWJhc2UuZGUvZGIvc2ktc2luZ2xlLnBocD9zZW5zb3JfaWQ9OTYmcnNpbmRleF9pZD01NgovLwoKbGV0IGluZGV4ID0gKEIwOCAtIEIxMSkgLyAoQjA4ICsgQjExKTsKbGV0IG1pbiA9IC0wLjg5OwpsZXQgbWF4ID0gMC44OTsKbGV0IHplcm8gPSAwLjA7CgovLyBjb2xvckJsZW5kIHdpbGwgcmV0dXJuIGEgY29sb3Igd2hlbiB0aGUgaW5kZXggaXMgYmV0d2VlbiBtaW4gYW5kIG1heCBhbmQgd2hpdGUgd2hlbiBpdCBpcyBsZXNzIHRoYW4gbWluLgovLyBUbyBzZWUgYmxhY2sgd2hlbiBpdCBpcyBtb3JlIHRoYW4gbWF4LCB1bmNvbW1lbnQgdGhlIGxhc3QgbGluZSBvZiBjb2xvckJsZW5kLgovLyBUaGUgbWluL21heCB2YWx1ZXMgd2VyZSBjb21wdXRlZCBhdXRvbWF0aWNhbGx5IGFuZCBtYXkgYmUgcG9vcmx5IHNwZWNpZmllZCwgZmVlbCBmcmVlIHRvIGNoYW5nZSB0aGVtIHRvIHR3ZWFrIHRoZSBkaXNwbGF5ZWQgcmFuZ2UuCi8vIFRoaXMgaW5kZXggY3Jvc3NlcyB6ZXJvLCBzbyBhIGRpdmVyZ2luZyBjb2xvciBtYXAgaXMgdXNlZC4gVG8gdHdlYWsgdGhlIHZhbHVlIG9mIHRoZSBicmVhayBpbiB0aGUgY29sb3IgbWFwLCBjaGFuZ2UgdGhlIHZhcmlhYmxlICd6ZXJvJy4KCmxldCB1bmRlcmZsb3dfY29sb3IgPSBbMSwgMSwgMV07CmxldCBsb3dfY29sb3IgPSBbMjA4LzI1NSwgODgvMjU1LCAxMjYvMjU1XTsKbGV0IGhpZ2hfY29sb3IgPSBbMjQxLzI1NSwgMjM0LzI1NSwgMjAwLzI1NV07CmxldCB6ZXJvX2NvbG9yID0gWzAsIDE0Ny8yNTUsIDE0Ni8yNTVdOwpsZXQgb3ZlcmZsb3dfY29sb3IgPSBbMCwgMCwgMF07CgpyZXR1cm4gY29sb3JCbGVuZChpbmRleCwgW21pbiwgbWluLCB6ZXJvLCBtYXhdLApbCgl1bmRlcmZsb3dfY29sb3IsCglsb3dfY29sb3IsCgl6ZXJvX2NvbG9yLCAvLyBkaXZlcmdlbnQgc3RlcCBhdCB6ZXJvCgloaWdoX2NvbG9yLAoJLy9vdmVyZmxvd19jb2xvciAvLyB1bmNvbW1lbnQgdG8gc2VlIG92ZXJmbG93cwpdKTsNCg%3D%3D&evalscripturl=https://raw.githubusercontent.com/sentinel-hub/custom-scripts/master/sentinel-2/indexdb/id_56.js){:target="_blank"}
  
 
-## <a name="sentinel-2"></a>Sentinel-2
-Dedicated to supplying data for [Copernicus services](http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus/Sentinel-2), Sentinel-2 carries a multispectral imager with a swath of 290 km. The imager provides a versatile set of 13 spectral bands spanning from the visible and near infrared to the shortwave infrared, featuring four spectral bands at 10 m, six bands at 20 m and three bands at 60 m spatial resolution. As indices primarily deal with combining various band reflectances, the table of 13 bands is given here for reference (see [here](https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-2-msi/msi-instrument){:target="_blank"} for details). The names of the Sentinel-2 bands at your disposal are *B01*, *B02*, *B03*, *B04*, *B05*, *B06*, *B07*, *B08*, *B8A*, *B09*, *B10*, *B11* and  *B12*.
+## General description
 
-#### Popular RGB composites
- - [Natural color](sentinel-2/natural_color) product computed correctly to match the color perceived by the human eye.
- - [True color](sentinel-2/true_color) simplistic true color image from red, green and blue bands.
- - [Wildfire visualization](sentinel-2/markuse_fire) (by Pierre Markuse, taken from his [blog post](https://pierre-markuse.net/2017/08/07/visualizing-wildfires-sentinel-2-imagery-eo-browser/){:target="_blank"})
+Normalized Differenced Moisture Index used top determine if irrigation has taken place in areas where there has been no recent rain events. If NDMI is above 0, depending on the land and canopy cover, it is possible to determine if irrigation has taken place. Using this Index with Sentinel-2 bands 08 and 11 it is possible to identify this with 10 m. resolution. The logic used for this was taken from this article from [This article.](https://www.agricolus.com/en/indici-vegetazione-ndvi-ndmi-istruzioni-luso/)
 
-#### Remote sensing indices
- - [False color infrared](sentinel-2/false_color_infrared)
- - [NDVI](sentinel-2/ndvi) - normalized difference vegetation index
- - [NDVI uncertainty](sentinel-2/ndvi_uncertainty) - visualization of uncertainty of NDVI due to uncertainty in band values
- - [collection](sentinel-2/indexdb) of remote sensing indices from an extensive [Index database (IDB)](http://www.indexdatabase.de/){:target="_blank"}
- - [ARI](sentinel-2/ari) - anthocyanin reflectance index
- - [ARVI](sentinel-2/arvi) - atmospherically resistant vegetation index 
- - [CHL_REDEDGE](sentinel-2/chl_rededge) - chlorophyll red-edge
- - [EVI](sentinel-2/evi) - enhanced vegetation index
- - [EVI2](sentinel-2/evi2) - enhanced vegetation index 2
- - [GNDVI](sentinel-2/gndvi) - green normalized difference vegetation index
- - [MCARI](sentinel-2/mcari) - modified chlorophyll absorption in reflectance index
- - [MSI](sentinel-2/msi) - moisture stress index
- - [NBR](sentinel-2/nbr) - normalized burn ratio  
- - [NDII](sentinel-2/ndii) - normalized difference 819/1600 NDII
- - [NDSI](sentinel-2/ndsi) - normalised difference snow index  
- - [NDWI](sentinel-2/ndwi) - normalized difference water index  
- - [PSSRB1](sentinel-2/pssrb1) - simple ratio 800/650 pigment specific simple ratio B1  
- - [SAVI](sentinel-2/savi) - soil adjusted vegetation index  
- - [SIPI1](sentinel-2/sipi1) - structure insensitive pigment index
+By following that logic, and knowing land uses within an area as well as climatic conditions, it was possible to difference between productive and non-productive areas first, and then see how this Index is reflected in different agricultural parcels. Some of them showed high levels of NDMI in summer moths after several weeks without rain. The only source of irrigation water was from an aquifer below. Some of the parcels do have water concessions and others not, so it was possible to identify illegal water use. On the other hand, it was possible to identify if a parcel in which the crop is known (e.g. citrus crops) irrigation is being effective or not during the crucial growing season in summer, as it is possible to find if some parts of the farm are being under or over irrigated. 
+
+
+## Color legend
+<table>
+  <tr>
+    <th>NDMI range</th>
+    <th>Interpretation</th>
+    <th>Color</th>
+  </tr>
+  <tr>
+    <td>NDMI &lt; -1 to -0.8</td>
+    <td>Bare soil</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; -0.8 to -0.6</td>
+    <td>Almost absent canopy cover</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; -0.6 to -0.4</td>
+    <td>Very low canopy cover</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; -0.4 to -0.2</td>
+    <td>Low canopy cover, dry or very low canopy cover, wet</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; -0.2 to 0</td>
+    <td>Mid-low canopy cover, high water stress or low canopy cover, low water stress</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; 0 to 0.2</td>
+    <td>Average canopy cover, high water stress or mid-low canopy cover, low water stress</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; 0.2 to 0.4</td>
+    <td>Mid-high canopy cover, high water stress or average canopy cover, low water stress</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; 0.4 to 0.6</td>
+    <td>High canopy cover, no water stress</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; 0.6 to 0.8</td>
+    <td>Very high canopy cover, no water stress</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
+  <tr>
+    <td>NDMI &lt; 0.8 to 1</td>
+    <td>Total canopy cover, no water stress/ waterlogging</td>
+    <td style="background-color: #000000;"></td>
+  </tr>
  
-#### Cloud detection algorithms
- - [Cohen-Braaten-Yang cloud detection](sentinel-2/cby_cloud_detection/)
- - [Hollstein Clouds, Cirrus, Snow, Shadow, Water and Clear Sky Pixels detection](sentinel-2/hollstein)
+</table>
 
-#### Snow and glaciers algorithms
- - [Snow classifier](sentinel-2/snow_classifier/)
- - [Monthly snow report](sentinel-2/monthly_snow_report)
- - [Snow cover change detection](sentinel-2/snow_cover_change)
-
-#### Disaster management and prevention algorithms
- - [Detecting deep moist convection](sentinel-2/deep_moist_convection)
- - [Fire boundary](sentinel-2/fire_boundary)
-
-#### Land use/cover classification algorithms
- - [False Color Composite](sentinel-2/false_color_composite)
- - [Barren soil](sentinel-2/barren_soil)
-
-#### Agriculture and forestry algorithms
- - [NDVI anomaly detection](sentinel-2/ndvi_anomaly_detection)
- - [Forest cut temporal detection](sentinel-2/forest_cut_temporal_detection)
- - [Pseudo forest canopy density (pseudo-FCD)](sentinel-2/pseudo_forest_canopy_density)
- - [Infrared agriculture display](sentinel-2/infrared_agriculture_display)
-
-#### Marine environment algorithms
- - [White-water detection](sentinel-2/white_water)
- - [Ocean plastic detector prototype](sentinel-2/ocean_plastic_detector)
-
-#### Urban planning algorithms
- - [Green city](sentinel-2/green_city)
- - [City highlights](sentinel-2/city_highlights)
- - [Urban land infrared color](sentinel-2/urban_land_infrared)
-
-#### Other multi-temporal scripts
- - [Monthly composite](sentinel-2/monthly_composite)
-
-
-## <a name="sentinel-3"></a>Sentinel-3
-
-Sentinel-3 is a low Earth-orbit moderate size satellite compatible with small launchers including VEGA and ROCKOT. The main objective of the mission is to measure sea surface topography, sea and land surface temperature, and ocean and land surface color with high accuracy and reliability to support ocean forecasting systems, environmental monitoring and climate monitoring. Ocean and Land Colour Instrument (OLCI) provides a set of 21 bands ranging from the visible to the near infrared light (400 nm < λ< 1 020 nm). The Sentinel-3 provides imagery in 300 m spatial resolution. Sentinel-3 OLCI instrument ensures continuity of the ENVISAT MERIS.
-
-#### Enhanced true color scripts
- - [Enhanced true color](sentinel-3/enhanced_true_color)
- - [Enhanced true color-2](sentinel-3/enhanced_true_color-2)
-
-
-## <a name="sentinel-5P"></a>Sentinel-5P
-
-Sentinel-5P provides atmospheric measurements, relating to air quality, climate forcing, ozone and UV radiation with high spatio-temporal resolution. Its data is used for monitoring of concentrations of carbon monoxide (CO), nitrogen dioxide (NO2) and ozone (O3) in air as well as for monitoring of UV aerosol index (AER_AI) and different geophysical parameters of clouds (CLOUD). EO Browser serves level 2 geophysical products. The TROPOspheric Monitoring Instrument (TROPOMI) on board of the satellite operates in the ultraviolet to shortwave infrared range with 7 different spectral bands: UV-1 (270-300nm), UV-2 (300-370nm), VIS (370-500nm), NIR-1 (685-710nm), NIR-2 (755-773nm), SWIR-1 (1590-1675nm) and SWIR-3 (2305-2385nm). Its spatial resolution is below 8km for wavelengths above 300nm and below 50km for wavelength below 300nm. It covers almost the whole globe (95 % coverage for latitudes in the interval [-7°, 7°]).
-
-#### Available scripts
- - [Nitrogen Dioxide tropospheric column](sentinel-5p/nitrogen_dioxide_tropospheric_column)
-
-
-## <a name="landsat-8"></a>Landsat-8
-The Landsat program is the longest running enterprise for acquisition of satellite imagery of Earth, running from 1972. The most recent, [Landsat 8](http://landsat.usgs.gov/landsat8.php){:target="_blank"}, was launched on February 11, 2013. Landsat-8 data has 11 spectral bands with spatial resolutions ranging from 15 to 60 meters. The names of the Landsat-8 bands at your disposal are *B01*, *B02*, *B03*, *B04*, *B05*, *B06*, *B07*, *B08*, *B09*, *B10* and *B11*.
-
-#### Remote sensing indices
-  - [collection](landsat-8/indexdb) of remote sensing indices from an extensive [Index database (IDB)](http://www.indexdatabase.de/){:target="_blank"}
-  - [Build-up index](landsat-8/built_up_index)
-
-#### Other available scripts
-  - [Land surface temperature (LST) mapping](landsat-8/land_surface_temperature_mapping)
-
-
-## <a name="modis"></a>MODIS
-The Moderate Resolution Imaging Spectroradiometer (MODIS) MCD43A4 version 6 on Sentinel Hub is hosted at Amazon Web Services (AWS). Dataset is updated daily and provides the 500 meter Nadir Bidirectional reflectance distribution function Adjusted Reflectance (NBAR) data of MODIS "land" bands 1-7: *B01*, *B02*, *B03*, *B04*, *B05*, *B06* and *B07*.
-
-#### Remote sensing indices
-  - [collection](modis/indexdb) of remote sensing indices from an extensive [Index database (IDB)](http://www.indexdatabase.de/){:target="_blank"}
-
-
-# <a name="howto"></a>Adding new custom scripts
-Have a look at the [template](example) and follow the procedure described there.  
-
-
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-<br />
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+## References
+ [1] Agricolus, [NDVI and NDMI - Instructions for use
+](https://www.agricolus.com/en/indici-vegetazione-ndvi-ndmi-istruzioni-luso/). Accessed on June 1st, 2019.
